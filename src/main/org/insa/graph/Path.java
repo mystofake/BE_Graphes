@@ -193,11 +193,14 @@ public class Path {
      * 
      * @return true if the path is valid, false otherwise.
      * 
-     * @deprecated Need to be implemented.
      */
     public boolean isValid() {
-        // TODO:
-        return false;
+        List<Arc> l = this.getArcs();
+        for (Iterator<Arc> iter = l.iterator(); iter.hasNext(); )
+        {
+        	E element = iter.next();
+        }
+        return true;
     }
 
     /**
