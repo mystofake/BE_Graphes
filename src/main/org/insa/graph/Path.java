@@ -83,6 +83,11 @@ public class Path {
         List<Arc> arcs = new ArrayList<Arc>();
         List<Arc> succ = null;
         Node prev = null;
+
+        if(nodes.size() == 1)
+        {
+        	return new Path(graph, nodes.get(0));
+        }
         
         for (Node node : nodes)
     	{
@@ -94,7 +99,7 @@ public class Path {
             	{
             		if(arc.getDestination().equals(node) && arc.getLength() < shortest)
             		{
-            			shortest = arc.getMinimumTravelTime();
+            			shortest = arc.getLength();
             			selected = arc;
             		}
             	}
