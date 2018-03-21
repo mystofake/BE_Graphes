@@ -196,10 +196,30 @@ public class Path {
      */
     public boolean isValid() {
         List<Arc> l = this.getArcs();
-        for (Iterator<Arc> iter = l.iterator(); iter.hasNext(); )
+        Arc prev = null;
+        for (Arc arc : l)
+    	{
+        	if(prev != null)
+        	{
+        		if(!prev.getDestination().equals(arc.getOrigin()))
+        		{
+        			return false;
+        		}
+        	}
+        	else
+        	{
+        		if(!this.getOrigin().equals(arc.getOrigin()))
+        		{
+        			return false;
+        		}
+        	}
+        	prev = arc;
+    	}
+        if(!prev.getDestination().equals(this.getDestination()))
         {
-        	E element = iter.next();
+        	return false;
         }
+
         return true;
     }
 
