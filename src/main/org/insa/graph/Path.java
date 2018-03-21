@@ -71,39 +71,38 @@ public class Path {
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
      * 
-     * @deprecated Need to be implemented.
+     * 
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        int i;
+        List<Arc> succ = null;
+        Node prev = null;
         
-        for(i=0;i<nodes.size();i++)
-        {
-        	Node noeud_actuel = nodes.get(i);
-        	Node noeud_suivant = nodes.get(i+1);
-        	Arc arc_to_add;
-        	
-        	List<Arc> arcs_noeud_actuel = noeud_actuel.getSuccessors();
-        	
-        	for(Arc successeur : arcs_noeud_actuel)
+        for (Node node : nodes)
+    	{
+        	if(prev != null)
         	{
-        		Node noeud_successeur = successeur.getDestination();
-        		if(noeud_successeur.compareTo(noeud_suivant) && successeur.getLength() < )
+        		Arc selected = null;
+        		double shortest = Double.POSITIVE_INFINITY;
+        		for (Arc arc : succ)
+            	{
+            		if(arc.getDestination().equals(node) && arc.getLength() < shortest)
+            		{
+            			shortest = arc.getMinimumTravelTime();
+            			selected = arc;
+            		}
+            	}
+        		if(selected == null)
         		{
-        			arc_to_add
+        			throw new IllegalArgumentException("invalid node list");
         		}
+        		arcs.add(selected);
         	}
-        	
-        	arcs.add(arc_to_add);
-        	
-        	
-        }
+        	succ = node.getSuccessors();
+        	prev = node;
+    	}
         
-        
-        
-        
-        // TODO:
         return new Path(graph, arcs);
     }
 
