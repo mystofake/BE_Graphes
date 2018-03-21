@@ -32,6 +32,11 @@ public class Path {
         List<Arc> succ = null;
         Node prev = null;
         
+        if(nodes.size() == 1)
+        {
+        	return new Path(graph, nodes.get(0));
+        }
+        
         for (Node node : nodes)
     	{
         	if(prev != null)
