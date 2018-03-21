@@ -81,6 +81,33 @@ public class Path {
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
+        int i;
+        
+        for(i=0;i<nodes.size();i++)
+        {
+        	Node noeud_actuel = nodes.get(i);
+        	Node noeud_suivant = nodes.get(i+1);
+        	Arc arc_to_add;
+        	
+        	List<Arc> arcs_noeud_actuel = noeud_actuel.getSuccessors();
+        	
+        	for(Arc successeur : arcs_noeud_actuel)
+        	{
+        		Node noeud_successeur = successeur.getDestination();
+        		if(noeud_successeur.compareTo(noeud_suivant) && successeur.getLength() < )
+        		{
+        			arc_to_add
+        		}
+        	}
+        	
+        	arcs.add(arc_to_add);
+        	
+        	
+        }
+        
+        
+        
+        
         // TODO:
         return new Path(graph, arcs);
     }
@@ -225,13 +252,12 @@ public class Path {
      * 
      */
     public boolean isValid() {
-        List<Arc> l = this.getArcs();
         Arc prev = null;
-        if(l.size() == 0)
+        if(this.arcs.size() == 0)
         {
         	return true;
         }
-        for (Arc arc : l)
+        for (Arc arc : this.arcs)
     	{
         	if(prev != null)
         	{
@@ -267,9 +293,8 @@ public class Path {
     public float getLength() {
     	
     	float length = 0;
-    	java.util.List<Arc> maliste = this.getArcs();
     	
-    	for(Arc arc: maliste)
+    	for(Arc arc: this.arcs)
     	{
     		length = length + arc.getLength();
     	}
@@ -285,15 +310,10 @@ public class Path {
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
      * 
-     * Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        double time;
         float distance = this.getLength();
-        
-        time = distance/(speed*1000/3600); /* Conversion en m/s */
-        
-        return time;
+        return distance/(speed*1000/3600);
     }
 
     /**
@@ -302,14 +322,12 @@ public class Path {
      * 
      * @return Minimum travel time to travel this path (in seconds).
      * 
-     * Need to be implemented.
      */
     public double getMinimumTravelTime() {
  
     	double time = 0;
-    	java.util.List<Arc> maliste = this.getArcs();
     	
-    	for(Arc arc: maliste)
+    	for(Arc arc: this.arcs)
     	{
     		time = time + arc.getMinimumTravelTime();
     	}
