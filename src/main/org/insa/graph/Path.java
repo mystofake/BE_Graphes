@@ -199,6 +199,10 @@ public class Path {
     public boolean isValid() {
         List<Arc> l = this.getArcs();
         Arc prev = null;
+        if(l.size() == 0)
+        {
+        	return true;
+        }
         for (Arc arc : l)
     	{
         	if(prev != null)
