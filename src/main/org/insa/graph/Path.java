@@ -2,6 +2,7 @@ package org.insa.graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class Path {
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        List<Arc> succ = null;
+        Iterator<Arc> succ = null;
         Node prev = null;
         
         if(nodes.size() == 1)
@@ -43,8 +44,9 @@ public class Path {
         	{
         		Arc selected = null;
         		double fastest = Double.POSITIVE_INFINITY;
-        		for (Arc arc : succ)
+        		while(succ.hasNext())
             	{
+        			Arc arc = succ.next();
             		if(arc.getDestination().equals(node) && arc.getMinimumTravelTime() < fastest)
             		{
             			fastest = arc.getMinimumTravelTime();
@@ -57,7 +59,7 @@ public class Path {
         		}
         		arcs.add(selected);
         	}
-        	succ = node.getSuccessors();
+        	succ = node.iterator();
         	prev = node;
     	}
         
@@ -81,7 +83,7 @@ public class Path {
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        List<Arc> succ = null;
+        Iterator<Arc> succ = null;
         Node prev = null;
 
         if(nodes.size() == 1)
@@ -95,8 +97,9 @@ public class Path {
         	{
         		Arc selected = null;
         		double shortest = Double.POSITIVE_INFINITY;
-        		for (Arc arc : succ)
+        		while(succ.hasNext())
             	{
+        			Arc arc = succ.next();
             		if(arc.getDestination().equals(node) && arc.getLength() < shortest)
             		{
             			shortest = arc.getLength();
@@ -109,7 +112,7 @@ public class Path {
         		}
         		arcs.add(selected);
         	}
-        	succ = node.getSuccessors();
+        	succ = node.iterator();
         	prev = node;
     	}
         
