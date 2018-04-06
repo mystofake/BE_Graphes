@@ -150,15 +150,30 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     	}
 
         int index = array.indexOf(x);
-        if(index == -1)
+
+        if(index == -1 || index >= this.currentSize)
         {
         	throw new ElementNotFoundException(x);
         }
+        int parent = index_parent(index);        
+
+        E lastItem = this.array.get(--currentSize);
+    
         
-        E last = deleteMin();
+        array.set(index, lastItem);
+        if(this.array.get(index).compareTo(this.array.get(parent)) <0)
+        {
+        	
+        	this.percolateUp(index);
+        }
         
-        array.set(index, last);
-        this.percolateUp(index);
+        else
+    	{
+    	
+        	this.percolateDown(index);
+    	}
+        
+        //this.array.remove(this.array.size() - 1);
     }
 
     @Override
