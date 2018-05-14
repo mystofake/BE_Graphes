@@ -8,6 +8,7 @@ public class Label implements Comparable<Label>
 	private double cout;
 	private boolean marked;
 	private Node chosenPrevious;
+	private boolean isInHeap;
 	
 	Label(Node node)
 	{
@@ -15,6 +16,7 @@ public class Label implements Comparable<Label>
 		this.cout = Double.POSITIVE_INFINITY;
 		this.marked = false;
 		this.chosenPrevious = null;
+		this.isInHeap = false;
 	}
 	
 	@Override
@@ -69,5 +71,15 @@ public class Label implements Comparable<Label>
 	public void mark()
 	{
 		this.marked = true;
+	}
+
+	public boolean isInHeap()
+	{
+		return this.isInHeap;
+	}
+	
+	public void setInHeap(boolean isInHeap)
+	{
+		this.isInHeap = isInHeap;
 	}
 }

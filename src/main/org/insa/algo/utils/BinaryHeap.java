@@ -11,6 +11,8 @@ package org.insa.algo.utils;
 
 import java.util.ArrayList;
 
+import org.insa.algo.shortestpath.Label;
+
 /**
  * Implements a binary heap. Note that all "matching" is based on the compareTo
  * method.
@@ -37,7 +39,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     /**
      * Construct a copy of the given heap.
      * 
-     * @param heap Binary heap to copy.
+     * @param heap Binthis.array.get(i)ary heap to copy.
      */
     public BinaryHeap(BinaryHeap<E> heap) {
         this.currentSize = heap.currentSize;
@@ -71,6 +73,22 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
      */
     private int index_left(int index) {
         return index * 2 + 1;
+    }
+
+    /**
+     * @return Index of the left child of the given index.
+     */
+    public void debug_print() {
+        for(int i=0;i<currentSize;++i)
+        {
+        	Label l = (Label)this.array.get(i);
+        	System.out.println(i+" : "+l.getNode().getId()+" (cost : "+l.getCost()+")");
+        }
+        for(int i=currentSize+1;i<array.size();++i)
+        {
+        	Label l = (Label)this.array.get(i);
+        	System.out.println(i+" R: "+l.getNode().getId()+" (cost : "+l.getCost()+")");
+        }
     }
 
     /**
@@ -161,9 +179,8 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     
         
         array.set(index, lastItem);
-        if(this.array.get(index).compareTo(this.array.get(parent)) <0)
+        if(this.array.get(index).compareTo(this.array.get(parent)) < 0)
         {
-        	
         	this.percolateUp(index);
         }
         
@@ -190,6 +207,17 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         this.arraySet(0, lastItem);
         this.percolateDown(0);
         return minItem;
+    }
+
+    public boolean firstIsSmallest() {
+        for(int i=1;i<currentSize;++i)
+        {
+        	if(array.get(0).compareTo(array.get(i)) > 0)
+        	{
+        		return false;
+        	}
+        }
+        return true;
     }
 
     /**

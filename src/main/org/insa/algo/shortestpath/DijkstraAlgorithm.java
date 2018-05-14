@@ -42,7 +42,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 		{
 			Node n = it.next();
 			Label label = new Label(n);
-			allLabels.insert(label);
+			allLabels.insert(label
+import java.util.ArrayList;);
 			if(n.equals(data.getOrigin()))
 			{
 				label.setCost(0.0);
@@ -79,11 +80,14 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 		{
 			++cptIteration;
 			
-			Label previousLabel = labels.deleteMin();	
+			Label previousLabel = labels.deleteMin();
+			previousLabel.setInHeap(false);
 			if(previousLabel.getNode().equals(data.getDestination()))
 			{
+				notifyDestinationReached(data.getDestination());
 				break;
 			}
+			
 			Iterator<Arc> successors = previousLabel.getNode().iterator();
 			
 			while(successors.hasNext())
@@ -93,8 +97,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 					continue;
 				}
 				Label label = allLabels.get(arc.getDestination().getId());
-
-				notifyDestinationReached(data.getDestination());
 				
 				if(label.isMarked())
 				{
@@ -102,18 +104,36 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 				}
 
 				double w = data.getCost(arc) + previousLabel.getCost();
-				
+
 				if (Double.isInfinite(label.getCost()) && Double.isFinite(w)) {
 					notifyNodeReached(arc.getDestination());
 				}
 
-				
 				if(w < label.getCost())
 				{
 					label.setCost(w);
 					label.setPreviousNode(previousLabel.getNode());
-					labels.insert(label);
+					if(!label.isInHeap())
+					{
+						label.setInHeap(true);
+						labels.insert(label);
+					}
+					labels.// le pb est la ; percolate etc
 				}
+			}
+			
+			System.out.println("etape "+cptIteration+" on point "+previousLabel.getNode().getId()+" (cost : "+previousLabel.getCost()+")");
+			labels.debug_print();
+			if(!labels.firstIsSmallest())
+			{
+				System.out.println("oula");
+				/*try {
+					TimeUnit.SECONDS.sleep(1);
+				}
+				catch(Exception e)
+				{
+					
+				}*/
 			}
 			
 			/*if(previousLabel.getNode().getId() == 118)
