@@ -5,23 +5,29 @@ import org.insa.graph.Node;
 public class Label implements Comparable<Label>
 {
 	private Node node;
-	private double cout;
+	private double cost;
 	private boolean marked;
 	private Node chosenPrevious;
-	private boolean isInHeap;
 	
 	Label(Node node)
 	{
 		this.node = node;
-		this.cout = Double.POSITIVE_INFINITY;
+		this.cost = Double.POSITIVE_INFINITY;
 		this.marked = false;
 		this.chosenPrevious = null;
-		this.isInHeap = false;
+	}
+	
+	Label(Label other)
+	{ // copy
+		this.node = other.node;
+		this.cost = other.cost;
+		this.marked = other.marked;
+		this.chosenPrevious = other.chosenPrevious;
 	}
 	
 	@Override
 	public int compareTo(Label other) {
-		float cmp = Double.compare(this.getCost(), other.getCost());
+		double cmp = Double.compare(this.getTotalCost(), other.getTotalCost());
 		if(cmp > 0.0)
 		{
 			return 1;
@@ -33,14 +39,21 @@ public class Label implements Comparable<Label>
 		return 0;
 		//return Double(this.getCout().compareTo(Double(other.getCout())));
 	}
-	/*@Override
-    public int compareTo(Label other) {
-        return 0;
-    }*/
+	
+	public double getTotalCost()
+	{
+		return this.getCost();
+	}
+	
 	
 	public Node getNode()
 	{
 		return node;
+	}
+	
+	public void setNode(Node node)
+	{
+		this.node = node;
 	}
 	
 	public Node getPreviousNode()
@@ -55,12 +68,12 @@ public class Label implements Comparable<Label>
 	
 	public double getCost()
 	{
-		return this.cout;
+		return this.cost;
 	}
 	
-	public void setCost(double cout)
+	public void setCost(double cost)
 	{
-		this.cout = cout;
+		this.cost = cost;
 	}
 	
 	public boolean isMarked()
@@ -71,15 +84,5 @@ public class Label implements Comparable<Label>
 	public void mark()
 	{
 		this.marked = true;
-	}
-
-	public boolean isInHeap()
-	{
-		return this.isInHeap;
-	}
-	
-	public void setInHeap(boolean isInHeap)
-	{
-		this.isInHeap = isInHeap;
 	}
 }

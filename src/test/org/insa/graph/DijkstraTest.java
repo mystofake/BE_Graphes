@@ -120,7 +120,7 @@ public class DijkstraTest {
 
     @Test
     public void testOnInsaMap() {
-    	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+    	String mapName = "../insa.mapgr";
 
     	try
     	{
@@ -128,12 +128,14 @@ public class DijkstraTest {
 	                new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 	
 	        Graph graph = reader.read();
-	    	
+
 	    	//for(int from=0;from<graph.size();++from)
-	        for(int from=31;from<32;++from)
+		    for(int from=0;from<50;++from)
+	        //for(int from=31;from<32;++from)
 	    	{
 	    		//for(int to=from+1;to<graph.size();++to)
-	        	for(int to=954;to<955;++to)
+		    	for(int to=from+1;to<50;++to)
+	        	//for(int to=954;to<955;++to)
 	    		{
 	    			ArcInspector arcInspector1 = ArcInspectorFactory.getAllFilters().get(0);
 	    	        ShortestPathData spd = new ShortestPathData(graph, graph.get(from), graph.get(to), arcInspector1);
@@ -149,8 +151,8 @@ public class DijkstraTest {
 	    	        if(solutionBellmanFord.isFeasible())
 	    	        {
 	    	        	System.out.println(from+" : "+to);
-	    	        	System.out.println((solutionBellmanFord.getPath().getLength()-solutionDijkstra.getPath().getLength()));
-	    	        	Drawing drawing = createDrawing();
+	    	        	//System.out.println((solutionBellmanFord.getPath().getLength()-solutionDijkstra.getPath().getLength()));
+	    	        	/*Drawing drawing = createDrawing();
 
 	    	            // TODO: Draw the graph on the drawing.
 	    	            drawing.drawGraph(graph);
@@ -160,7 +162,7 @@ public class DijkstraTest {
 	    	            Path path2 = solutionBellmanFord.getPath();
 	    	            drawing.drawPath(path1);
 	    	            drawing.drawPath(path2);
-	    	            TimeUnit.SECONDS.sleep(10);
+	    	            TimeUnit.SECONDS.sleep(10);*/
 	    	            
 	    	        	assertTrue(Math.abs(solutionBellmanFord.getPath().getLength()-solutionDijkstra.getPath().getLength()) <= 3.4);
 	    	        }
