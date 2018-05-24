@@ -26,7 +26,7 @@ public class LabelStar extends Label
 	
 	public double getTotalCost()
 	{
-		return estimatedLeft + this.getCost();
+		return this.estimatedLeft + this.getCost();
 	}
 	
 	public double getEstimatedLeft()

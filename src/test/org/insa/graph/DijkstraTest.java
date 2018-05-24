@@ -137,36 +137,38 @@ public class DijkstraTest {
 		    	for(int to=from+1;to<50;++to)
 	        	//for(int to=954;to<955;++to)
 	    		{
-	    			ArcInspector arcInspector1 = ArcInspectorFactory.getAllFilters().get(0);
-	    	        ShortestPathData spd = new ShortestPathData(graph, graph.get(from), graph.get(to), arcInspector1);
-	    			ArcInspector arcInspector2 = ArcInspectorFactory.getAllFilters().get(0);
-	    	        ShortestPathData spd2 = new ShortestPathData(graph, graph.get(from), graph.get(to), arcInspector2);
-	    	        BellmanFordAlgorithm bf = new BellmanFordAlgorithm(spd);
-	    	        ShortestPathSolution solutionBellmanFord = bf.run();
-	    	        
-	    	        DijkstraAlgorithm djk = new DijkstraAlgorithm(spd2);
-	    	        ShortestPathSolution solutionDijkstra = djk.run();
+		    		for(int filter = 0;filter < ArcInspectorFactory.getAllFilters().size();++filter)
+		    		{
+		    			ArcInspector arcInspector1 = ArcInspectorFactory.getAllFilters().get(filter);
+		    	        ShortestPathData spd = new ShortestPathData(graph, graph.get(from), graph.get(to), arcInspector1);
+		    			ArcInspector arcInspector2 = ArcInspectorFactory.getAllFilters().get(filter);
+		    	        ShortestPathData spd2 = new ShortestPathData(graph, graph.get(from), graph.get(to), arcInspector2);
+		    	        BellmanFordAlgorithm bf = new BellmanFordAlgorithm(spd);
+		    	        ShortestPathSolution solutionBellmanFord = bf.run();
+		    	        
+		    	        DijkstraAlgorithm djk = new DijkstraAlgorithm(spd2);
+		    	        ShortestPathSolution solutionDijkstra = djk.run();
+		
+		    	        assertTrue(solutionBellmanFord.isFeasible() == solutionDijkstra.isFeasible());
+		    	        if(solutionBellmanFord.isFeasible())
+		    	        {
+		    	        	System.out.println("node "+from+" to "+to+" , filter : "+filter);
+		    	        	//System.out.println((solutionBellmanFord.getPath().getLength()-solutionDijkstra.getPath().getLength()));
+		    	        	/*Drawing drawing = createDrawing();
 	
-	    	        assertTrue(solutionBellmanFord.isFeasible() == solutionDijkstra.isFeasible());
-	    	        if(solutionBellmanFord.isFeasible())
-	    	        {
-	    	        	System.out.println(from+" : "+to);
-	    	        	//System.out.println((solutionBellmanFord.getPath().getLength()-solutionDijkstra.getPath().getLength()));
-	    	        	/*Drawing drawing = createDrawing();
-
-	    	            // TODO: Draw the graph on the drawing.
-	    	            drawing.drawGraph(graph);
-
-	    	            // TODO: Read the path.
-	    	            Path path1 = solutionDijkstra.getPath();
-	    	            Path path2 = solutionBellmanFord.getPath();
-	    	            drawing.drawPath(path1);
-	    	            drawing.drawPath(path2);
-	    	            TimeUnit.SECONDS.sleep(10);*/
-	    	            
-	    	        	assertTrue(Math.abs(solutionBellmanFord.getPath().getLength()-solutionDijkstra.getPath().getLength()) <= 3.4);
-	    	        }
-	    	        
+		    	            // TODO: Draw the graph on the drawing.
+		    	            drawing.drawGraph(graph);
+	
+		    	            // TODO: Read the path.
+		    	            Path path1 = solutionDijkstra.getPath();
+		    	            Path path2 = solutionBellmanFord.getPath();
+		    	            drawing.drawPath(path1);
+		    	            drawing.drawPath(path2);
+		    	            TimeUnit.SECONDS.sleep(10);*/
+		    	            
+		    	        	assertTrue(Math.abs(solutionBellmanFord.getPath().getLength()-solutionDijkstra.getPath().getLength()) <= 3.4);
+		    	        }
+		    		}
 	    		}
 	    	}
     	}

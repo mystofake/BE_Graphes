@@ -3,6 +3,7 @@ package org.insa.algo.shortestpath;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.insa.graph.GraphStatistics;
 import org.insa.graph.Node;
 
 public class AStarAlgorithm extends DijkstraAlgorithm {
@@ -24,7 +25,15 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 		{
 			Node currentNode = it.next();
 			LabelStar l = new LabelStar(currentNode);
-			l.setEstimatedLeft(currentNode.getPoint().distanceTo(data.getDestination().getPoint()));
+			if(data.getMode().name() == "TIME")
+			{ // todo : treat maxSpeed (could be GraphStatistics.NO_MAXIMUM_SPEED)
+				double maxSpeed = data.getGraph().getGraphInformation().getMaximumSpeed();
+				l.setEstimatedLeft(currentNode.getPoint().distanceTo(data.getDestination().getPoint())/maxSpeed*3.6);
+			}
+			else
+			{
+				l.setEstimatedLeft(currentNode.getPoint().distanceTo(data.getDestination().getPoint()));
+			}
 			hashMap.put(currentNode.getId(), l);
 		}
     	
