@@ -24,7 +24,7 @@ public class AStarTest {
 
     @Test
     public void testOnInsaMap() {
-    	String mapName = "../insa.mapgr";
+    	String mapName = "/home/commetud/3emeAnneMIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
 
     	try
     	{
@@ -34,11 +34,11 @@ public class AStarTest {
 	        Graph graph = reader.read();
 
 	    	//for(int from=0;from<graph.size();++from)
-		    for(int from=0;from<100;++from)
+		    for(int from=0;from<50;++from)
 	        //for(int from=31;from<32;++from)
 	    	{
 	    		//for(int to=from+1;to<graph.size();++to)
-		    	for(int to=from+1;to<100;++to)
+		    	for(int to=from+1;to<50;++to)
 	        	//for(int to=954;to<955;++to)
 	    		{
 		    		for(int filter = 0;filter < ArcInspectorFactory.getAllFilters().size();++filter)

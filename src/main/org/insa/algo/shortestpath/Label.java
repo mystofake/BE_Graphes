@@ -36,6 +36,8 @@ public class Label implements Comparable<Label>
 		{
 			return -1;
 		}
+		
+		// equality
 		return 0;
 		//return Double(this.getCout().compareTo(Double(other.getCout())));
 	}

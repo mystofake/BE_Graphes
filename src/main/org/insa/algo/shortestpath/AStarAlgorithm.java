@@ -21,13 +21,14 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 		
     	Iterator<Node> it = data.getGraph().iterator();
     	
+    	double maxSpeed = data.getGraph().getGraphInformation().getMaximumSpeed();
+    	
 		while(it.hasNext())
 		{
 			Node currentNode = it.next();
 			LabelStar l = new LabelStar(currentNode);
-			if(data.getMode().name() == "TIME")
+			if(data.getMode().name() == "TIME" && maxSpeed != GraphStatistics.NO_MAXIMUM_SPEED)
 			{ // todo : treat maxSpeed (could be GraphStatistics.NO_MAXIMUM_SPEED)
-				double maxSpeed = data.getGraph().getGraphInformation().getMaximumSpeed();
 				l.setEstimatedLeft(currentNode.getPoint().distanceTo(data.getDestination().getPoint())/maxSpeed*3.6);
 			}
 			else

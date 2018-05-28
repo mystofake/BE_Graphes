@@ -120,7 +120,7 @@ public class DijkstraTest {
 
     @Test
     public void testOnInsaMap() {
-    	String mapName = "../insa.mapgr";
+    	String mapName = "/home/commetud/3emeAnneMIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
 
     	try
     	{
