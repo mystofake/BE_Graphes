@@ -5,12 +5,14 @@ import java.awt.Dimension;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.insa.algo.ArcInspector;
 import org.insa.algo.ArcInspectorFactory;
+import org.insa.algo.shortestpath.AStarAlgorithm;
 import org.insa.algo.shortestpath.BellmanFordAlgorithm;
 import org.insa.algo.shortestpath.ShortestPathData;
 import org.insa.algo.shortestpath.ShortestPathSolution;
@@ -94,9 +96,9 @@ public class Launch {
         //ShortestPathAlgorithm sp = new ShortestPathAlgorithm();
         ArcInspector arcInspector = ArcInspectorFactory.getAllFilters().get(0);
         ShortestPathData spd = new ShortestPathData(graph, graph.get(0), graph.get(300), arcInspector);
-        BellmanFordAlgorithm bf = new BellmanFordAlgorithm(spd);
-        ShortestPathSolution solution = bf.run();
-        System.out.println("c fini");
+        AStarAlgorithm astar = new AStarAlgorithm(spd);
+        ShortestPathSolution solution = astar.run();
+
 
         // Create the drawing:
         Drawing drawing = createDrawing();
@@ -109,7 +111,7 @@ public class Launch {
 
         // TODO: Draw the path.
         drawing.drawPath(path);
-
+        TimeUnit.SECONDS.sleep(10);
     }
 
 }

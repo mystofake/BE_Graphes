@@ -141,6 +141,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 			
 			solution = new ShortestPathSolution(data, Status.OPTIMAL, path);
 		}
+		
+		//System.out.println(solution.getSolvingTime());
 
 		return solution;
 	}

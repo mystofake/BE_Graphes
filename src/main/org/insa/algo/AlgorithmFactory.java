@@ -1,4 +1,5 @@
 package org.insa.algo;
+import org.insa.algo.shortestpath.*;
 
 import java.lang.reflect.Constructor;
 import java.util.IdentityHashMap;
@@ -32,6 +33,7 @@ public class AlgorithmFactory {
         registerAlgorithm(ShortestPathAlgorithm.class, "Bellman-Ford", BellmanFordAlgorithm.class);
         registerAlgorithm(ShortestPathAlgorithm.class, "Dijkstra", DijkstraAlgorithm.class);
         registerAlgorithm(ShortestPathAlgorithm.class, "A*", AStarAlgorithm.class);
+        registerAlgorithm(ShortestPathAlgorithm.class, "Modified A*", ModifiedAStarAlgorithm.class);
 
         // Register your algorithms here:
         // registerAlgorithm(CarPoolingAlgorithm.class, "My Awesome Algorithm",

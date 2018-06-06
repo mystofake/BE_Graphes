@@ -1,5 +1,6 @@
 package exchangepath;
 
+import org.insa.algo.shortestpath.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +18,7 @@ import org.insa.graph.Graph;
 import org.insa.graph.Node;
 import org.insa.graph.Path;
 
-public class RobotExchange extends ExchangePathAlgorithm {
+/*public class RobotExchange extends ExchangePathAlgorithm {
 
 	public RobotExchange(ShortestPathData data1, ShortestPathData data2) {
 		super(data1, data2);
@@ -113,4 +114,4 @@ public class RobotExchange extends ExchangePathAlgorithm {
 		return solution;
 	}
 
-}
+}*/
